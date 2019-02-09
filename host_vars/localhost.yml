@@ -1,0 +1,6 @@
+bootstrap_pacman_packages:
+  - base-devel
+  - git
+  - python
+  - python2
+  - go

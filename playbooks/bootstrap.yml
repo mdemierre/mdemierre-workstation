@@ -1,0 +1,46 @@
+# Install the base system packages and AUR support
+- hosts: localhost
+  tasks:
+    - name: Update pacman cache
+      become: yes
+      pacman:
+        update_cache: yes
+
+    - name: Install packages
+      become: yes
+      pacman:
+        name: "{{ bootstrap_pacman_packages }}"
+        state: present
+    
+    - name: Create AUR builder user
+      become: yes
+      user:
+        name: aur-builder
+        group: wheel
+
+    - name: Add AUR builder user to sudoers for pacman
+      become: yes
+      lineinfile:
+        path: /etc/sudoers.d/11-install-aur_builder
+        line: 'aur-builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+        create: yes
+        validate: 'visudo -cf %s'
+
+    - name: Download yay AUR helper
+      become: yes
+      become_user: aur-builder
+      git:
+        repo: "https://aur.archlinux.org/yay.git"
+        dest: /tmp/yay-pkg
+    
+    - name: Install yay AUR helper
+      become: yes
+      become_user: aur-builder
+      shell: 'makepkg -si --noconfirm'
+      args:
+        chdir: /tmp/yay-pkg
+
+    - name: Install ansible-aur-git
+      become: yes
+      become_user: aur-builder
+      shell: 'yay -S ansible-aur-git --noconfirm'
