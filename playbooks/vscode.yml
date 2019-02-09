@@ -1,0 +1,11 @@
+- hosts: localhost
+  tasks:
+    - name: Install VS Code
+      become: yes
+      become_user: aur-builder
+      aur:
+        name: visual-studio-code-bin
+
+    - name: Install VS Code extensions
+      shell: 'code --install-extension {{ item }}'
+      with_items: "{{ vscode__extensions }}"

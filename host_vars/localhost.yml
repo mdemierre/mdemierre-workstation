@@ -4,3 +4,6 @@ bootstrap_pacman_packages:
   - python
   - python2
   - go
+
+vscode__extensions:
+  - vscoss.vscode-ansible
