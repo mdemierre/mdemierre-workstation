@@ -5,7 +5,14 @@
       become: yes
       pacman:
         name: zsh zsh-completions
+        state: present
     
+    - name: Install command-line utils
+      become: yes
+      pacman:
+        name: fasd bat diff-so-fancy colordiff
+        state: present
+
     - name: Install my dotfiles
       git:
         repo: git@github.com:mdemierre/dotfiles.git
