@@ -1,0 +1,30 @@
+# Configure GNOME DE
+- hosts: localhost
+  tasks:
+    - name: Install zsh packages
+      become: yes
+      pacman:
+        name: zsh zsh-completions
+    
+    - name: Install my dotfiles
+      git:
+        repo: git@github.com:mdemierre/dotfiles.git
+        dest: /home/marc/.dotfiles
+        key_file: /home/marc/.ssh/id_ed25519
+        accept_hostkey: yes
+    
+    - name: Install my prezto fork
+      git:
+        repo: git@github.com:mdemierre/prezto.git
+        version: mdemierre-customizations
+        recursive: yes
+        dest: /home/marc/.zprezto
+        key_file: /home/marc/.ssh/id_ed25519
+        accept_hostkey: yes
+
+    - name: Activate prezto
+      file:
+        src: "{{ item }}"
+        dest: "/home/marc/.{{ item | basename }}"
+        state: link
+      with_fileglob: "/home/marc/.zprezto/runcoms/z*"
