@@ -1,0 +1,15 @@
+# Configure GNOME DE
+- hosts: localhost
+  tasks:
+    - name: Install GNOME packages
+      become: yes
+      pacman:
+        name: gnome
+
+# Install fonts
+- hosts: localhost
+  tasks:
+    - name: Install font packages
+      become: yes
+      pacman:
+        name: "adobe-source-code-pro-fonts adobe-source-sans-pro-fonts adobe-source-serif-pro-fonts noto-fonts ttf-liberation"
