@@ -4,12 +4,44 @@
     - name: Install GNOME packages
       become: yes
       pacman:
-        name: gnome
+        name: gnome dconf-editor gnome-tweaks gnome-software-packagekit-plugin
 
-# Install fonts
-- hosts: localhost
-  tasks:
     - name: Install font packages
       become: yes
       pacman:
         name: "adobe-source-code-pro-fonts adobe-source-sans-pro-fonts adobe-source-serif-pro-fonts noto-fonts ttf-liberation"
+
+    - name: Install themes
+      become: yes
+      pacman:
+        name: arc-solid-gtk-theme
+        state: installed
+  
+    - name: Install icons
+      become: yes
+      become_user: aur-builder
+      aur:
+        name: "{{ item }}"
+      with_items:
+        - numix-icon-theme-git
+        - numix-circle-icon-theme-git
+        - numix-square-icon-theme-git
+
+    - name: Set GNOME settings
+      dconf:
+        key: "{{ item/key }}"
+        value: "{{ item/value }}"
+        state: present
+      with_dict:
+        /org/gnome/desktop/interface/gtk-theme: "'Arc-Darker-solid'"
+        /org/gnome/desktop/interface/icon-theme: "'Numix-Circle'"
+        /org/gnome/desktop/interface/font-name: "'Source Sans Pro 13'"
+        /org/gnome/desktop/interface/monospace-font-name: "'Source Code Pro 12'"
+        /org/gnome/desktop/interface/document-font-name: "'Source Sans Pro 12'"
+        /org/gnome/desktop/interface/clock-show-date: "true"
+        /org/gnome/mutter/center-new-windows: "true"
+        /org/gnome/shell/enabled-extensions: "['user-theme@gnome-shell-extensions/gcampax/github/com']"
+        /org/gnome/shell/extensions/user-theme/name: "'Arc-Dark-solid'"
+        /org/gnome/Terminal/Legacy/Settings/default-show-menubar: "false"
+        /org/gnome/Terminal/Legacy/Settings/new-terminal-mode: "'tab'"
+        /org/gnome/Terminal/Legacy/Settings/theme-variant: "'dark'"

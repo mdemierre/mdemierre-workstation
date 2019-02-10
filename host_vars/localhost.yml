@@ -3,6 +3,7 @@ bootstrap_pacman_packages:
   - git
   - python
   - python2
+  - python-psutil
   - go
 
 vscode__extensions:
