@@ -6,7 +6,7 @@
       pacman:
         name: zsh zsh-completions bash-completion
         state: present
-    
+
     - name: Install command-line utilities
       become: yes
       pacman:
@@ -19,7 +19,6 @@
         dest:  /home/marc/.config/base16-shell
         key_file: /home/marc/.ssh/id_ed25519
         accept_hostkey: yes
-      
 
     - name: Install my dotfiles
       git:
@@ -29,7 +28,7 @@
         accept_hostkey: yes
 
     # TODO: Link dotfiles, maybe use a dotfile manager
-    
+
     - name: Install my prezto fork
       git:
         repo: git@github.com:mdemierre/prezto.git

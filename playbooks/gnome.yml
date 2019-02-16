@@ -16,7 +16,7 @@
       pacman:
         name: arc-solid-gtk-theme
         state: installed
-  
+
     - name: Install icons
       become: yes
       become_user: aur-builder
