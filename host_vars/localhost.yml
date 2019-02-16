@@ -1,3 +1,5 @@
+env__home_dir: /home/marc
+
 bootstrap_pacman_packages:
   - base-devel
   - git
@@ -13,3 +15,5 @@ vscode__extensions:
   - eamodio.gitlens
   - peterjausovec.vscode-docker
   - davidanson.vscode-markdownlint
+
+dotfiles__path: "{{ env__home_dir }}/.dotfiles"

@@ -10,37 +10,64 @@
     - name: Install command-line utilities
       become: yes
       pacman:
-        name: fasd bat diff-so-fancy colordiff tldr thefuck jq htop tree
+        name: fasd bat diff-so-fancy colordiff tldr thefuck jq htop tree vim
         state: present
 
     - name: Install base16-shell
       git:
         repo: git@github.com:chriskempson/base16-shell.git
-        dest:  /home/marc/.config/base16-shell
-        key_file: /home/marc/.ssh/id_ed25519
+        dest:  "{{ env__home_dir }}/.config/base16-shell"
+        key_file: "{{ env__home_dir }}/.ssh/id_ed25519"
         accept_hostkey: yes
 
     - name: Install my dotfiles
       git:
         repo: git@github.com:mdemierre/dotfiles.git
-        dest: /home/marc/.dotfiles
-        key_file: /home/marc/.ssh/id_ed25519
+        dest: "{{ dotfiles__path }}"
+        key_file: "{{ env__home_dir }}/.ssh/id_ed25519"
         accept_hostkey: yes
 
     # TODO: Link dotfiles, maybe use a dotfile manager
+
+    - name: Link dotfiles
+      file:
+        src: "{{ dotfiles__path }}/{{ item.src }}"
+        dest: "{{ env__home_dir }}/{{ item.dest }}"
+        state: link
+      with_items:
+        - src: git/gitconfig
+          dest: .gitconfig
+        - src: vim/vimrc
+          dest: .vimrc
+      tags:
+        - dotfiles
+
+    - name: Install Vundle vim plugin manager
+      git:
+        repo: git@github.com:VundleVim/Vundle.vim.git
+        dest: ~/.vim/bundle/Vundle.vim
+        key_file: "{{ env__home_dir }}/.ssh/id_ed25519"
+        accept_hostkey: yes
+      tags:
+        - dotfiles
+
+    - name: Install vim plugins
+      command: "vim -u {{ dotfiles__path }}/vim/vundler.vim +PluginInstall +qall"
+      tags:
+        - dotfiles
 
     - name: Install my prezto fork
       git:
         repo: git@github.com:mdemierre/prezto.git
         version: mdemierre-customizations
         recursive: yes
-        dest: /home/marc/.zprezto
-        key_file: /home/marc/.ssh/id_ed25519
+        dest: "{{ env__home_dir }}/.zprezto"
+        key_file: "{{ env__home_dir }}/.ssh/id_ed25519"
         accept_hostkey: yes
 
     - name: Activate prezto
       file:
         src: "{{ item }}"
-        dest: "/home/marc/.{{ item | basename }}"
+        dest: "{{ env__home_dir }}/.{{ item | basename }}"
         state: link
-      with_fileglob: "/home/marc/.zprezto/runcoms/z*"
+      with_fileglob: "{{ env__home_dir }}/.zprezto/runcoms/z*"
