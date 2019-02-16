@@ -10,7 +10,7 @@
     - name: Install command-line utilities
       become: yes
       pacman:
-        name: fasd bat diff-so-fancy colordiff
+        name: fasd bat diff-so-fancy colordiff tldr thefuck jq htop tree
         state: present
 
     - name: Install base16-shell
