@@ -8,3 +8,8 @@ bootstrap_pacman_packages:
 
 vscode__extensions:
   - vscoss.vscode-ansible
+  - zhuangtongfa.material-theme # One Dark Pro color theme
+  - be5invis.vscode-icontheme-nomo-dark # Nomo Dark icon theme
+  - eamodio.gitlens
+  - peterjausovec.vscode-docker
+  - davidanson.vscode-markdownlint
