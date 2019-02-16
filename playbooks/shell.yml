@@ -1,17 +1,25 @@
-# Configure GNOME DE
+# Configure Shell
 - hosts: localhost
   tasks:
-    - name: Install zsh packages
+    - name: Install basic shell packages
       become: yes
       pacman:
-        name: zsh zsh-completions
+        name: zsh zsh-completions bash-completion
         state: present
     
-    - name: Install command-line utils
+    - name: Install command-line utilities
       become: yes
       pacman:
         name: fasd bat diff-so-fancy colordiff
         state: present
+
+    - name: Install base16-shell
+      git:
+        repo: git@github.com:chriskempson/base16-shell.git
+        dest:  /home/marc/.config/base16-shell
+        key_file: /home/marc/.ssh/id_ed25519
+        accept_hostkey: yes
+      
 
     - name: Install my dotfiles
       git:
@@ -19,6 +27,8 @@
         dest: /home/marc/.dotfiles
         key_file: /home/marc/.ssh/id_ed25519
         accept_hostkey: yes
+
+    # TODO: Link dotfiles, maybe use a dotfile manager
     
     - name: Install my prezto fork
       git:
