@@ -26,8 +26,8 @@
         dest: "{{ dotfiles__path }}"
         key_file: "{{ env__home_dir }}/.ssh/id_ed25519"
         accept_hostkey: yes
-
-    # TODO: Link dotfiles, maybe use a dotfile manager
+      tags:
+        - dotfiles
 
     - name: Link dotfiles
       file:
@@ -64,6 +64,8 @@
         dest: "{{ env__home_dir }}/.zprezto"
         key_file: "{{ env__home_dir }}/.ssh/id_ed25519"
         accept_hostkey: yes
+      tags:
+        - prezto
 
     - name: Activate prezto
       file:
@@ -71,3 +73,5 @@
         dest: "{{ env__home_dir }}/.{{ item | basename }}"
         state: link
       with_fileglob: "{{ env__home_dir }}/.zprezto/runcoms/z*"
+      tags:
+        - prezto
