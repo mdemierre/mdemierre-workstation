@@ -8,4 +8,4 @@
 
     - name: Install VS Code extensions
       shell: 'code --install-extension {{ item }}'
-      with_items: "{{ vscode__extensions }}"
+      loop: "{{ vscode__extensions }}"

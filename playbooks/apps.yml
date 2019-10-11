@@ -1,11 +1,18 @@
 - hosts: localhost
   tasks:
+    - name: Install apps from pacman
+      become: true
+      pacman:
+        name:
+          - telegram-desktop
+          - libreoffice-fresh
+
     - name: Install apps from AUR
       become: yes
       become_user: aur-builder
       aur:
         name: "{{ item }}"
-      with_items:
+      loop:
         - google-chrome
         - lastpass
         - gpmdp
@@ -14,8 +21,3 @@
         - nautilus-dropbox
         - insync
         - insync-nautilus
-
-    - name: Install apps from pacman
-      become: true
-      pacman:
-        name: telegram-desktop 	libreoffice-fresh

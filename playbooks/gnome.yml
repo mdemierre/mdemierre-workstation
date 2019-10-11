@@ -1,36 +1,44 @@
-# Configure GNOME DE
 - hosts: localhost
   tasks:
-    - name: Install GNOME packages
+    - name: Install GNOME packages from pacman
       become: yes
       pacman:
-        name: gnome dconf-editor gnome-tweaks gnome-software-packagekit-plugin
+        name:
+          - gnome
+          - dconf-editor
+          - gnome-tweaks
+          - gnome-software-packagekit-plugin
 
     - name: Install font packages
       become: yes
       pacman:
-        name: "adobe-source-code-pro-fonts adobe-source-sans-pro-fonts adobe-source-serif-pro-fonts noto-fonts ttf-liberation"
+        name:
+          - adobe-source-code-pro-fonts
+          - adobe-source-sans-pro-fonts
+          - adobe-source-serif-pro-fonts
+          - noto-fonts
+          - ttf-liberation
 
     - name: Install themes
       become: yes
       pacman:
-        name: arc-solid-gtk-theme
-        state: installed
+        name:
+          - arc-solid-gtk-theme
 
-    - name: Install icons
+    - name: Install icons from AUR
       become: yes
       become_user: aur-builder
       aur:
         name: "{{ item }}"
-      with_items:
+      loop:
         - numix-icon-theme-git
         - numix-circle-icon-theme-git
         - numix-square-icon-theme-git
 
     - name: Set GNOME settings
       dconf:
-        key: "{{ item/key }}"
-        value: "{{ item/value }}"
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
         state: present
       with_dict:
         /org/gnome/desktop/interface/gtk-theme: "'Arc-Darker-solid'"

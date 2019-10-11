@@ -1,6 +1,6 @@
 - hosts: localhost
   tasks:
-    - name: Install go tools from pacman
+    - name: Install Go tools from pacman
       become: yes
       pacman:
         state: present

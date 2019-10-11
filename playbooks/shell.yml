@@ -4,27 +4,40 @@
     - name: Install basic shell packages
       become: yes
       pacman:
-        name: zsh zsh-completions bash-completion
         state: present
+        name:
+          - zsh
+          - zsh-completions
+          - bash-completion
 
     - name: Install command-line utilities
       become: yes
       pacman:
-        name: fasd bat diff-so-fancy colordiff tldr thefuck jq htop tree vim
         state: present
+        name:
+          - fasd
+          - bat
+          - diff-so-fancy
+          - colordiff
+          - tldr
+          - thefuck
+          - jq
+          - htop
+          - tree
+          - vim
 
     - name: Install base16-shell
       git:
         repo: git@github.com:chriskempson/base16-shell.git
         dest:  "{{ env__home_dir }}/.config/base16-shell"
-        key_file: "{{ env__home_dir }}/.ssh/id_ed25519"
+        key_file: "{{ env__github_ssh_key }}"
         accept_hostkey: yes
 
     - name: Install my dotfiles
       git:
         repo: git@github.com:mdemierre/dotfiles.git
         dest: "{{ dotfiles__path }}"
-        key_file: "{{ env__home_dir }}/.ssh/id_ed25519"
+        key_file: "{{ env__github_ssh_key }}"
         accept_hostkey: yes
       tags:
         - dotfiles
@@ -34,7 +47,7 @@
         src: "{{ dotfiles__path }}/{{ item.src }}"
         dest: "{{ env__home_dir }}/{{ item.dest }}"
         state: link
-      with_items:
+      loop:
         - src: git/gitconfig
           dest: .gitconfig
         - src: vim/vimrc
@@ -46,7 +59,7 @@
       git:
         repo: git@github.com:VundleVim/Vundle.vim.git
         dest: ~/.vim/bundle/Vundle.vim
-        key_file: "{{ env__home_dir }}/.ssh/id_ed25519"
+        key_file: "{{ env__github_ssh_key }}"
         accept_hostkey: yes
       tags:
         - dotfiles
@@ -62,7 +75,7 @@
         version: mdemierre-customizations
         recursive: yes
         dest: "{{ env__home_dir }}/.zprezto"
-        key_file: "{{ env__home_dir }}/.ssh/id_ed25519"
+        key_file: "{{ env__github_ssh_key }}"
         accept_hostkey: yes
       tags:
         - prezto

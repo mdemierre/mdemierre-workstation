@@ -3,7 +3,9 @@
     - name: Install Kubernetes tools from pacman
       become: yes
       pacman:
-        name: kubectl minikube
+        name:
+          - kubectl
+          - minikube
         state: present
 
     - name: Install Kubernetes tools from AUR

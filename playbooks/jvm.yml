@@ -1,16 +1,21 @@
-# Install the Java development environment
 - hosts: localhost
   become: yes
   tasks:
     - name: Install java JDKs
       pacman:
-       name: jdk-openjdk jdk11-openjdk jdk8-openjdk
        state: present
+       name:
+        - jdk-openjdk
+        - jdk11-openjdk
+        - jdk8-openjdk
 
     - name: Install Java build tools
       pacman:
-        name: maven gradle ant
         state: present
+        name:
+          - maven
+          - gradle
+          - ant
 
     - name: Install Kotlin tooling
       pacman:
@@ -19,5 +24,8 @@
 
     - name: Install Scala tooling
       pacman:
-        name: scala-docs scala-sources sbt
         state: present
+        name:
+          - scala-docs
+          - scala-sources
+          - sbt

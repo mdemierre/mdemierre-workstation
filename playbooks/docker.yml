@@ -3,4 +3,6 @@
     - name: Install docker tools from pacman
       become: true
       pacman:
-        name: docker docker-compose
+        name:
+         - docker
+         - docker-compose
