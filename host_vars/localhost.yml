@@ -1,4 +1,6 @@
-env__home_dir: /home/marc
+env__user: marc
+env__home_dir: "/home/{{ env__user }}"
+env__rcfile: "{{ env__home_dir }}/.zsh/zshrc.local.zsh" # Shell RC file (bashrc, zshrc, etc) for sourcing scripts
 
 bootstrap_pacman_packages:
   - base-devel
