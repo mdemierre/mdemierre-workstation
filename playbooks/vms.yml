@@ -1,0 +1,35 @@
+- hosts: localhost
+  tasks:
+    - name: Install VM runtimes
+      become: yes
+      pacman:
+        state: present
+        name:
+          - qemu
+          - libvirt
+          - virtualbox
+          - virtualbox-host-modules-arch
+          - virtualbox-guest-iso
+
+    - name: Install VM tools from pacman
+      become: yes
+      pacman:
+        state: present
+        name:
+          - vagrant
+          - packer
+
+    - name: Install VM tools from AUR
+      become: yes
+      become_user: aur-builder
+      aur:
+        name: "{{ item }}"
+      loop:
+        - virtualbox-ext-oracle
+
+    - name: Add user to virtualbox group (for USB access)
+      become: yes
+      user:
+        name: "{{ env__user }}"
+        append: yes
+        groups: vboxusers
