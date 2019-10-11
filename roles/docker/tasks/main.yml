@@ -1,0 +1,33 @@
+- name: Install docker tools from pacman
+  become: true
+  pacman:
+    name:
+      - docker
+      - docker-compose
+
+- name: Add user to docker group
+  become: yes
+  user:
+    name: "{{ env__user }}"
+    append: yes
+    groups: docker
+
+- name: Ensure docker config directory exists
+  become: true
+  file:
+    path: /etc/docker
+    state: directory
+
+- name: Ensure docker config files are present
+  become: true
+  template:
+    src: templates/daemon.json.j2
+    dest: /etc/docker/daemon.json
+  notify: docker-restart
+
+- name: Ensure docker is enabled and started
+  become: yes
+  systemd:
+    name: docker
+    enabled: true
+    state: started

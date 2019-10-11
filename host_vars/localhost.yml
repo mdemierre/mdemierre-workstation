@@ -19,5 +19,6 @@ vscode__extensions:
   - davidanson.vscode-markdownlint
   - peterjausovec.vscode-docker
   - ms-vscode.go
+  - samuelcolvin.jinjahtml
 
 dotfiles__path: "{{ env__home_dir }}/.dotfiles"
