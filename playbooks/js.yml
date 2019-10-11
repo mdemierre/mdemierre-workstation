@@ -1,0 +1,38 @@
+- hosts: localhost
+  tasks:
+    - name: Install JS packages from pacman
+      become: yes
+      pacman:
+       name: nodejs npm
+       state: present
+
+    - name: Install JS tools from AUR
+      become: yes
+      become_user: aur-builder
+      aur:
+        name: "{{ item }}"
+      loop:
+        - nvm
+
+    - name: Create NVM dir
+      file:
+        state: directory
+        path: "{{ env__home_dir }}/.nvm"
+
+    - name: Add NVM sourcing to rc file
+      blockinfile:
+          path: "{{ env__rcfile }}"
+          create: yes
+          state: present
+          block:  |-
+            # Set up Node Version Manager
+            export NVM_DIR="$HOME/.nvm"
+            export NVM_SOURCE="/usr/share/nvm" # AUR package location
+            [ -s "$NVM_SOURCE/nvm.sh" ] && . "$NVM_SOURCE/nvm.sh"
+          marker: "# ANSIBLE - nvm - {mark}"
+
+    - name: Add NPM global packages (tools)
+      become: true
+      npm:
+        global: yes
+        name: typescript
