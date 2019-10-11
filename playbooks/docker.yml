@@ -6,3 +6,17 @@
         name:
          - docker
          - docker-compose
+
+    - name: Add user to docker group
+      become: yes
+      user:
+        name: "{{ env__user }}"
+        append: yes
+        groups: docker
+
+    - name: Enable and start docker
+      become: yes
+      systemd:
+          name: docker
+          enabled: true
+          state: started
