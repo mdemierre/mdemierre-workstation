@@ -1,0 +1,17 @@
+- hosts: localhost
+  tasks:
+    - name: Install Kubernetes tools from pacman
+      become: yes
+      pacman:
+        name: kubectl minikube
+        state: present
+
+    - name: Install Kubernetes tools from AUR
+      become: yes
+      become_user: aur-builder
+      aur:
+        name: "{{ item }}"
+      loop:
+        - kind-bin
+        - kubernetes-helm-bin
+        - kompose-bin
