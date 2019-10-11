@@ -1,0 +1,17 @@
+# Shell environment
+- import_playbook: shell.yml
+
+# Developer tools
+- import_playbook: jvm.yml
+- import_playbook: go.yml
+- import_playbook: js.yml
+
+# Virtualization
+- import_playbook: vms.yml
+- import_playbook: docker.yml
+- import_playbook: kubernetes.yml
+
+# GUI
+- import_playbook: gnome.yml
+- import_playbook: apps.yml
+- import_playbook: vscode.yml
