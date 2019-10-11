@@ -1,6 +1,7 @@
 env__user: marc
 env__home_dir: "/home/{{ env__user }}"
 env__rcfile: "{{ env__home_dir }}/.zsh/zshrc.local.zsh" # Shell RC file (bashrc, zshrc, etc) for sourcing scripts
+env__github_ssh_key: "{{ env__home_dir }}/.ssh/id_ed25519" # SSH key to use for github clones
 
 bootstrap_pacman_packages:
   - base-devel
