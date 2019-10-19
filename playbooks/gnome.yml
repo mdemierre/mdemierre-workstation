@@ -8,6 +8,8 @@
           - dconf-editor
           - gnome-tweaks
           - gnome-software-packagekit-plugin
+          - flatpak
+          - xdg-desktop-portal-gtk
 
     - name: Install font packages
       become: yes
