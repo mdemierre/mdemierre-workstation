@@ -17,3 +17,10 @@
         - kind-bin
         - kubernetes-helm-bin
         - kompose-bin
+
+    - name: Configure minikube
+      command: "minikube config set {{ item.key }} {{ item.value }}"
+      with_dict:
+        memory: 4096
+        vm-driver: kvm2
+      changed_when: false  # otherwise always marked as changed
