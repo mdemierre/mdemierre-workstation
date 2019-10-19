@@ -8,7 +8,6 @@
           - dconf-editor
           - gnome-tweaks
           - gnome-software-packagekit-plugin
-          - gparted
           - flatpak
           - xdg-desktop-portal-gtk
 

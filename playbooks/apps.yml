@@ -6,6 +6,7 @@
         name:
           - telegram-desktop
           - libreoffice-fresh
+          - gparted
 
     - name: Install apps from AUR
       become: yes
