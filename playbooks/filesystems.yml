@@ -1,0 +1,10 @@
+- hosts: localhost
+  tasks:
+    - name: Install filesystems support
+      become: yes
+      pacman:
+        name:
+          - exfat-utils  # exFAT
+          - ntfs-3g      # NTFS
+          - e2fsprogs    # ext2/3/4
+          - dosfstools   # vFAT
