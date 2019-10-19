@@ -6,6 +6,7 @@
         state: present
         name:
           - go
+          - dep
 
     # See: https://github.com/Microsoft/vscode-go/wiki/Go-tools-that-the-Go-extension-depends-on
     # Always marked as "changed" (command module)
