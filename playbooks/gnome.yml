@@ -19,6 +19,7 @@
           - adobe-source-sans-pro-fonts
           - adobe-source-serif-pro-fonts
           - noto-fonts
+          - noto-fonts-emoji
           - ttf-liberation
 
     - name: Install themes
