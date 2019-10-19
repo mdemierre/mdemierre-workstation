@@ -5,8 +5,15 @@
       pacman:
         state: present
         name:
+          # QEMU/KVM/libvirt
           - qemu
           - libvirt
+          - dnsmasq
+          - ebtables
+          - dmidecode
+          - bridge-utils
+          - gnu-netcat
+          # Virtualbox
           - virtualbox
           - virtualbox-host-modules-arch
           - virtualbox-guest-iso
@@ -27,9 +34,11 @@
       loop:
         - virtualbox-ext-oracle
 
-    - name: Add user to virtualbox group (for USB access)
+    - name: Add user to VM-related groups
       become: yes
       user:
         name: "{{ env__user }}"
         append: yes
-        groups: vboxusers
+        groups:
+          - vboxusers # vbox - USB access
+          - libvirt   # libvirt - passwordless management
