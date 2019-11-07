@@ -1,0 +1,14 @@
+- hosts: localhost
+  tasks:
+    - name: Install terminus console font
+      become: yes
+      pacman:
+        name:
+          - terminus-font
+        state: present
+
+    - name: Configure vconsole font and keyboard layout
+      become: yes
+      copy:
+        src: "{{ inventory_dir }}/files/vconsole.conf"
+        dest: /etc/vconsole.conf

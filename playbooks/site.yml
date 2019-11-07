@@ -2,6 +2,7 @@
 - import_playbook: filesystems.yml
 
 # Shell environment
+- import_playbook: vconsole.yml
 - import_playbook: shell.yml
 
 # Developer tools
