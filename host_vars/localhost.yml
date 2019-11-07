@@ -7,8 +7,8 @@ bootstrap_pacman_packages:
   - base-devel
   - git
   - python
-  - python2
   - python-psutil
+  - sshpass
   - go
 
 vscode__extensions:
