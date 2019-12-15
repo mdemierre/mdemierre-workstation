@@ -21,3 +21,6 @@
         - github.com/golangci/golangci-lint/cmd/golangci-lint
         - github.com/mgechev/revive
         - github.com/go-delve/delve/cmd/dlv
+        - github.com/fatih/gomodifytags
+        - github.com/josharian/impl
+        - github.com/davidrjenni/reftools/cmd/fillstruct
