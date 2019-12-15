@@ -18,8 +18,11 @@
           - adobe-source-code-pro-fonts
           - adobe-source-sans-pro-fonts
           - adobe-source-serif-pro-fonts
+          - adobe-source-han-sans-otc-fonts
+          - adobe-source-han-serif-otc-fonts
           - noto-fonts
           - noto-fonts-emoji
+          - noto-fonts-cjk
           - ttf-liberation
 
     - name: Install themes
@@ -51,8 +54,7 @@
         /org/gnome/desktop/interface/document-font-name: "'Source Sans Pro 12'"
         /org/gnome/desktop/interface/clock-show-date: "true"
         /org/gnome/mutter/center-new-windows: "true"
-        /org/gnome/shell/enabled-extensions: "['user-theme@gnome-shell-extensions/gcampax/github/com']"
         /org/gnome/shell/extensions/user-theme/name: "'Arc-Dark-solid'"
-        /org/gnome/Terminal/Legacy/Settings/default-show-menubar: "false"
-        /org/gnome/Terminal/Legacy/Settings/new-terminal-mode: "'tab'"
-        /org/gnome/Terminal/Legacy/Settings/theme-variant: "'dark'"
+        /org/gnome/terminal/legacy/default-show-menubar: "false"
+        /org/gnome/terminal/legacy/new-terminal-mode: "'tab'"
+        /org/gnome/terminal/legacy/theme-variant: "'dark'"
