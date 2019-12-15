@@ -42,3 +42,9 @@
         groups:
           - vboxusers # vbox - USB access
           - libvirt   # libvirt - passwordless management
+
+    - name: Ensure libvirtd is enabled and started
+      systemd:
+        name: "libvirtd"
+        state: started
+        enabled: yes
