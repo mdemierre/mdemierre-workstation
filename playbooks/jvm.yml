@@ -6,8 +6,14 @@
        state: present
        name:
         - jdk-openjdk
+        - openjdk-doc
+        - openjdk-src
         - jdk11-openjdk
+        - openjdk11-doc
+        - openjdk11-src
         - jdk8-openjdk
+        - openjdk8-doc
+        - openjdk8-src
 
     - name: Install Java build tools
       pacman:
