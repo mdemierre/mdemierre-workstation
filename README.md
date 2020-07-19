@@ -1,18 +1,18 @@
-# `arch-ansible`: Automated setup of my ArchLinux workstation
+# `mdemierre-workstation`: Automated setup of my ArchLinux workstation using Ansible
 
 ## What it does
 
 These playbooks install and configure:
 
 - Base packages and AUR support (via yay and ansible-aur)
-- My dotfiles and shell environment
+- Sheell configuration: My dotfiles and shell environment
 - Dev environments: JVM, Go, JS/TS
-- Virtualization environments: docker, kubernetes, VMs (virtualbox, vagrant, packer)
+- Virtualization: Docker, Kubernetes, VMs, related tools
 - Editors: VSCode
 
 ## Prerequisites
 
-Installed ArchLinux, with current user in sudoers
+Installed ArchLinux, with current user in sudoers.
 
 ## Install
 
