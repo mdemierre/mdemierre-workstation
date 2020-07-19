@@ -6,6 +6,9 @@
         name:
           - kubectl
           - minikube
+          - kubectx
+          - helm
+          - k9s
         state: present
 
     - name: Install Kubernetes tools from AUR
@@ -15,8 +18,8 @@
         name: "{{ item }}"
       loop:
         - kind-bin
-        - kubernetes-helm-bin
         - kompose-bin
+        - lens-bin
 
     - name: Configure minikube
       command: "minikube config set {{ item.key }} {{ item.value }}"
