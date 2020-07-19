@@ -15,16 +15,24 @@
       pacman:
         state: present
         name:
+          - vim
           - fasd
           - bat
-          - diff-so-fancy
-          - colordiff
+          - ripgrep
+          - fd
           - tldr
           - thefuck
           - jq
           - htop
           - tree
-          - vim
+
+    - name: Install command-line utilities from AUR
+      become: yes
+      become_user: aur-builder
+      aur:
+        name: "{{ item }}"
+      loop:
+        - git-delta-bin
 
     - name: Install base16-shell
       git:
@@ -52,6 +60,8 @@
           dest: .gitconfig
         - src: vim/vimrc
           dest: .vimrc
+        - src: bat
+          dest: .config/bat
       tags:
         - dotfiles
 
