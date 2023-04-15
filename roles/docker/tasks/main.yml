@@ -1,33 +1,35 @@
 - name: Install docker tools from pacman
   become: true
-  pacman:
+  community.general.pacman:
     name:
       - docker
       - docker-compose
 
 - name: Add user to docker group
-  become: yes
-  user:
+  become: true
+  ansible.builtin.user:
     name: "{{ env__user }}"
-    append: yes
+    append: true
     groups: docker
 
 - name: Ensure docker config directory exists
   become: true
-  file:
+  ansible.builtin.file:
     path: /etc/docker
     state: directory
+    mode: "u=rwx,g=rx,o=rx"
 
 - name: Ensure docker config files are present
   become: true
-  template:
+  ansible.builtin.template:
     src: templates/daemon.json.j2
     dest: /etc/docker/daemon.json
-  notify: docker-restart
+    mode: "u=rw,g=r,o=r"
+  notify: Handler-docker-restart
 
 - name: Ensure docker is enabled and started
-  become: yes
-  systemd:
+  become: true
+  ansible.builtin.systemd:
     name: docker
     enabled: true
     state: started

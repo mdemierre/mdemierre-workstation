@@ -1,18 +1,19 @@
 # Configure Shell
 - hosts: localhost
+  name: Configure shell environment (terminal, tools, dotfiles, ...)
   tasks:
     - name: Install basic shell packages
-      become: yes
-      pacman:
+      become: true
+      community.general.pacman:
         state: present
         name:
           - zsh
           - zsh-completions
           - bash-completion
 
-    - name: Install command-line utilities
-      become: yes
-      pacman:
+    - name: Install CLI utilities
+      become: true
+      community.general.pacman:
         state: present
         name:
           - bat
@@ -30,23 +31,23 @@
           - zoxide
 
     - name: Install base16-shell
-      git:
+      ansible.builtin.git:
         repo: git@github.com:chriskempson/base16-shell.git
-        dest:  "{{ env__home_dir }}/.config/base16-shell"
+        dest: "{{ env__home_dir }}/.config/base16-shell"
         key_file: "{{ env__github_ssh_key }}"
-        accept_hostkey: yes
+        accept_hostkey: true
 
     - name: Install my dotfiles
-      git:
+      ansible.builtin.git:
         repo: git@github.com:mdemierre/dotfiles.git
         dest: "{{ dotfiles__path }}"
         key_file: "{{ env__github_ssh_key }}"
-        accept_hostkey: yes
+        accept_hostkey: true
       tags:
         - dotfiles
 
     - name: Link dotfiles
-      file:
+      ansible.builtin.file:
         src: "{{ dotfiles__path }}/{{ item.src }}"
         dest: "{{ env__home_dir }}/{{ item.dest }}"
         state: link
@@ -62,9 +63,8 @@
       tags:
         - dotfiles
 
-
     - name: Install command-line utilities from AUR
-      become: yes
+      become: true
       become_user: aur-builder
       aur:
         name: "{{ item }}"
@@ -74,23 +74,23 @@
         - dotfiles
 
     - name: Install vim plugins
-      command: "vim :PlugInstall +qall"
+      ansible.builtin.command: "vim :PlugInstall +qall"
       tags:
         - dotfiles
 
     - name: Install my prezto fork
-      git:
+      ansible.builtin.git:
         repo: git@github.com:mdemierre/prezto.git
         version: mdemierre-customizations
-        recursive: yes
+        recursive: true
         dest: "{{ env__home_dir }}/.zprezto"
         key_file: "{{ env__github_ssh_key }}"
-        accept_hostkey: yes
+        accept_hostkey: true
       tags:
         - prezto
 
     - name: Activate prezto
-      file:
+      ansible.builtin.file:
         src: "{{ item }}"
         dest: "{{ env__home_dir }}/.{{ item | basename }}"
         state: link

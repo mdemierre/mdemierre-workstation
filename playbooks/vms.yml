@@ -1,8 +1,9 @@
 - hosts: localhost
+  name: Setup VM runtimes and tooling
   tasks:
     - name: Install VM runtimes
-      become: yes
-      pacman:
+      become: true
+      community.general.pacman:
         state: present
         name:
           # QEMU/KVM/libvirt
@@ -15,16 +16,16 @@
           - gnu-netcat
 
     - name: Add user to VM-related groups
-      become: yes
-      user:
+      become: true
+      ansible.builtin.user:
         name: "{{ env__user }}"
-        append: yes
+        append: true
         groups:
           - vboxusers # vbox - USB access
           - libvirt   # libvirt - passwordless management
 
     - name: Ensure libvirtd is enabled and started
-      systemd:
+      ansible.builtin.systemd:
         name: "libvirtd"
         state: started
-        enabled: yes
+        enabled: true

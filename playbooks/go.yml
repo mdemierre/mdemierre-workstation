@@ -1,8 +1,9 @@
 - hosts: localhost
+  name: Install Go development tooling
   tasks:
     - name: Install Go tools from pacman
-      become: yes
-      pacman:
+      become: true
+      community.general.pacman:
         state: present
         name:
           - go

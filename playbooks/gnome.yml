@@ -1,8 +1,9 @@
 - hosts: localhost
+  name: Install and configure GNOME DE
   tasks:
     - name: Install GNOME packages from pacman
-      become: yes
-      pacman:
+      become: true
+      community.general.pacman:
         name:
           - dconf-editor
           - flatpak
@@ -12,8 +13,8 @@
           - xdg-desktop-portal-gnome
 
     - name: Install font packages
-      become: yes
-      pacman:
+      become: true
+      community.general.pacman:
         name:
           - adobe-source-code-pro-fonts
           - adobe-source-han-sans-otc-fonts
@@ -27,7 +28,7 @@
           - ttf-liberation
 
     - name: Install icons from AUR
-      become: yes
+      become: true
       become_user: aur-builder
       aur:
         name: "{{ item }}"
@@ -36,17 +37,16 @@
         - numix-icon-theme-git
 
     - name: Set GNOME settings
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
         state: present
       with_dict:
         /org.gnome.desktop.interface/clock-show-date: "true"
-        /org/gnome/desktop/interface/icon-theme: "'Numix-Circle'"
-        /org/gnome/desktop/interface/font-name: "'Source Sans Pro 13'"
-        /org/gnome/desktop/interface/monospace-font-name: "'Source Code Pro 12'"
         /org/gnome/desktop/interface/document-font-name: "'Source Sans Pro 12'"
-        /org/gnome/desktop/interface/clock-show-date: "true"
+        /org/gnome/desktop/interface/font-name: "'Source Sans Pro 13'"
+        /org/gnome/desktop/interface/icon-theme: "'Numix-Circle'"
+        /org/gnome/desktop/interface/monospace-font-name: "'Source Code Pro 12'"
         /org/gnome/mutter/center-new-windows: "true"
         /org/gnome/terminal/legacy/new-terminal-mode: "'tab'"
         /org/gnome/terminal/legacy/theme-variant: "'dark'"

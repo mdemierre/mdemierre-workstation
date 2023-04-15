@@ -1,8 +1,9 @@
 - hosts: localhost
+  name: Install filesystems support
   tasks:
-    - name: Install filesystems support
-      become: yes
-      pacman:
+    - name: Install filesystem packages
+      become: true
+      community.general.pacman:
         name:
           - exfat-utils  # exFAT
           - ntfs-3g      # NTFS

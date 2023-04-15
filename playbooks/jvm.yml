@@ -1,22 +1,23 @@
 - hosts: localhost
-  become: yes
+  name: Install JVM development tooling
+  become: true
   tasks:
-    - name: Install java JDKs
-      pacman:
-       state: present
-       name:
-        - jdk-openjdk
-        - openjdk-doc
-        - openjdk-src
-        - jdk17-openjdk
-        - openjdk17-doc
-        - openjdk17-src
-        - jdk11-openjdk
-        - openjdk11-doc
-        - openjdk11-src
+    - name: Install java JDKs (LTS + latest)
+      community.general.pacman:
+        state: present
+        name:
+          - jdk-openjdk
+          - openjdk-doc
+          - openjdk-src
+          - jdk17-openjdk
+          - openjdk17-doc
+          - openjdk17-src
+          - jdk11-openjdk
+          - openjdk11-doc
+          - openjdk11-src
 
     - name: Install Java build tools
-      pacman:
+      community.general.pacman:
         state: present
         name:
           - maven
@@ -24,7 +25,6 @@
           - ant
 
     - name: Install Kotlin tooling
-      pacman:
+      community.general.pacman:
         name: kotlin
         state: present
-

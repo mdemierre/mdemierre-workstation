@@ -1,14 +1,16 @@
 - hosts: localhost
+  name: Configure vconsole
   tasks:
     - name: Install terminus console font
-      become: yes
-      pacman:
+      become: true
+      community.general.pacman:
         name:
           - terminus-font
         state: present
 
     - name: Configure vconsole font and keyboard layout
-      become: yes
-      copy:
+      become: true
+      ansible.builtin.copy:
         src: "{{ inventory_dir }}/files/vconsole.conf"
         dest: /etc/vconsole.conf
+        mode: "u=rw,g=r,o=r"

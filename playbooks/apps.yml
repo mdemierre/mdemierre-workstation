@@ -1,8 +1,9 @@
 - hosts: localhost
+  name: Install GUI applications
   tasks:
     - name: Install apps from pacman
       become: true
-      pacman:
+      community.general.community.general.pacman:
         name:
           - firefox
           - gparted
@@ -10,7 +11,7 @@
           - telegram-desktop
 
     - name: Install apps from AUR
-      become: yes
+      become: true
       become_user: aur-builder
       aur:
         name: "{{ item }}"

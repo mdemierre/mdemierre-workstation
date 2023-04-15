@@ -1,8 +1,9 @@
 - hosts: localhost
+  name: Install Kubernetes tooling
   tasks:
     - name: Install Kubernetes tools from pacman
-      become: yes
-      pacman:
+      become: true
+      community.general.pacman:
         name:
           - kubectl
           - kustomize
@@ -13,7 +14,7 @@
         state: present
 
     - name: Install Kubernetes tools from AUR
-      become: yes
+      become: true
       become_user: aur-builder
       aur:
         name: "{{ item }}"
@@ -22,8 +23,8 @@
         - lens-bin
 
     - name: Configure minikube
-      command: "minikube config set {{ item.key }} {{ item.value }}"
+      ansible.builtin.command: "minikube config set {{ item.key }} {{ item.value }}"
       with_dict:
         memory: 4096
         vm-driver: kvm2
-      changed_when: false  # otherwise always marked as changed
+      changed_when: false # otherwise always marked as changed

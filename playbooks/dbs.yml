@@ -1,7 +1,8 @@
 - hosts: localhost
+  name: Install DB tooling
   tasks:
     - name: Install DB clients
-      become: yes
-      pacman:
+      become: true
+      community.general.pacman:
         name:
           - postgresql-libs  # PosgreSQL

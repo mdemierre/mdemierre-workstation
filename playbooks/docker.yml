@@ -1,4 +1,6 @@
 - hosts: localhost
+  name: Install docker tooling
   tasks:
-    - import_role:
+    - name: Install docker tooling
+      ansible.builtin.import_role:
         name: "docker"
