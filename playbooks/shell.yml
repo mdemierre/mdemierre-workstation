@@ -15,24 +15,19 @@
       pacman:
         state: present
         name:
-          - vim
-          - fasd
           - bat
-          - ripgrep
+          - exa
           - fd
-          - tldr
-          - thefuck
-          - jq
+          - git-delta
           - htop
+          - jq
+          - ripgrep
+          - starship
+          - thefuck
+          - tldr
           - tree
-
-    - name: Install command-line utilities from AUR
-      become: yes
-      become_user: aur-builder
-      aur:
-        name: "{{ item }}"
-      loop:
-        - git-delta-bin
+          - vim
+          - zoxide
 
     - name: Install base16-shell
       git:
@@ -62,20 +57,24 @@
           dest: .vimrc
         - src: bat
           dest: .config/bat
+        - src: starship.toml
+          dest: .config/starship.toml
       tags:
         - dotfiles
 
-    - name: Install Vundle vim plugin manager
-      git:
-        repo: git@github.com:VundleVim/Vundle.vim.git
-        dest: ~/.vim/bundle/Vundle.vim
-        key_file: "{{ env__github_ssh_key }}"
-        accept_hostkey: yes
+
+    - name: Install command-line utilities from AUR
+      become: yes
+      become_user: aur-builder
+      aur:
+        name: "{{ item }}"
+      loop:
+        - vim-plug
       tags:
         - dotfiles
 
     - name: Install vim plugins
-      command: "vim -u {{ dotfiles__path }}/vim/vundler.vim +PluginInstall +qall"
+      command: "vim :PlugInstall +qall"
       tags:
         - dotfiles
 

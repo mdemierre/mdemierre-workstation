@@ -5,6 +5,7 @@
       pacman:
         name:
           - kubectl
+          - kustomize
           - minikube
           - kubectx
           - helm
@@ -18,7 +19,6 @@
         name: "{{ item }}"
       loop:
         - kind-bin
-        - kompose-bin
         - lens-bin
 
     - name: Configure minikube

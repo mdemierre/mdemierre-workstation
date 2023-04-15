@@ -4,9 +4,10 @@
       become: true
       pacman:
         name:
-          - telegram-desktop
-          - libreoffice-fresh
+          - firefox
           - gparted
+          - libreoffice-fresh
+          - telegram-desktop
 
     - name: Install apps from AUR
       become: yes
@@ -14,11 +15,9 @@
       aur:
         name: "{{ item }}"
       loop:
+        - 1password
+        - gnome-browser-connector
+        - gnome-shell-extension-dash-to-dock
         - google-chrome
-        - lastpass
-        - gpmdp
-        - typora
-        - dropbox
-        - nautilus-dropbox
         - insync
         - insync-nautilus

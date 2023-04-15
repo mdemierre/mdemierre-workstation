@@ -13,26 +13,6 @@
           - dmidecode
           - bridge-utils
           - gnu-netcat
-          # Virtualbox
-          - virtualbox
-          - virtualbox-host-modules-arch
-          - virtualbox-guest-iso
-
-    - name: Install VM tools from pacman
-      become: yes
-      pacman:
-        state: present
-        name:
-          - vagrant
-          - packer
-
-    - name: Install VM tools from AUR
-      become: yes
-      become_user: aur-builder
-      aur:
-        name: "{{ item }}"
-      loop:
-        - virtualbox-ext-oracle
 
     - name: Add user to VM-related groups
       become: yes

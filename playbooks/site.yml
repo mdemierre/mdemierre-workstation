@@ -8,7 +8,7 @@
 # Developer tools
 - import_playbook: jvm.yml
 - import_playbook: go.yml
-- import_playbook: js.yml
+# - import_playbook: js.yml
 - import_playbook: dbs.yml
 
 # Virtualization

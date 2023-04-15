@@ -5,4 +5,3 @@
       pacman:
         name:
           - postgresql-libs  # PosgreSQL
-          - mariadb-clients  # MariaDB/MySQL

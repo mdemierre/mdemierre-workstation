@@ -2,11 +2,10 @@
   tasks:
     - name: Install JS packages from pacman
       become: yes
-      state: present
       pacman:
-       name:
-        - nodejs
-        - npm
+        name:
+          - nodejs
+          - npm
 
     - name: Install JS tools from AUR
       become: yes
@@ -32,9 +31,3 @@
           export NVM_DIR="$HOME/.nvm"
           export NVM_SOURCE="/usr/share/nvm" # AUR package location
           [ -s "$NVM_SOURCE/nvm.sh" ] && . "$NVM_SOURCE/nvm.sh"
-
-    - name: Add NPM global packages (tools)
-      become: true
-      npm:
-        global: yes
-        name: typescript

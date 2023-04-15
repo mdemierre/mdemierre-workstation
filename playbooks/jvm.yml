@@ -8,12 +8,12 @@
         - jdk-openjdk
         - openjdk-doc
         - openjdk-src
+        - jdk17-openjdk
+        - openjdk17-doc
+        - openjdk17-src
         - jdk11-openjdk
         - openjdk11-doc
         - openjdk11-src
-        - jdk8-openjdk
-        - openjdk8-doc
-        - openjdk8-src
 
     - name: Install Java build tools
       pacman:
@@ -28,10 +28,3 @@
         name: kotlin
         state: present
 
-    - name: Install Scala tooling
-      pacman:
-        state: present
-        name:
-          - scala-docs
-          - scala-sources
-          - sbt
