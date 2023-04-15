@@ -12,13 +12,24 @@ bootstrap_pacman_packages:
   - go
 
 vscode__extensions:
-  - vscoss.vscode-ansible
-  - zhuangtongfa.material-theme # One Dark Pro color theme
   - be5invis.vscode-icontheme-nomo-dark # Nomo Dark icon theme
-  - eamodio.gitlens
   - davidanson.vscode-markdownlint
-  - peterjausovec.vscode-docker
-  - ms-vscode.go
+  - eamodio.gitlens
+  - ms-azuretools.vscode-docker
+  - ms-kubernetes-tools.vscode-kubernetes-tools
+  - ms-python.black-formatter
+  - ms-python.flake8
+  - ms-python.isort
+  - ms-python.python
+  - ms-vscode-remote.remote-containers
+  - golang.Go
+  - redhat.ansible
+  - redhat.vscode-yaml
+  - mechatroner.rainbow-csv
+  - EditorConfig.EditorConfig
   - samuelcolvin.jinjahtml
+  - VisualStudioExptTeam.vscodeintellicode
+  - yzhang.markdown-all-in-one
+  - zhuangtongfa.material-theme # One Dark Pro color theme
 
 dotfiles__path: "{{ env__home_dir }}/.dotfiles"

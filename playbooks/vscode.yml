@@ -1,12 +1,6 @@
 - hosts: localhost
   name: Setup the VSCode editor
   tasks:
-    - name: Install VS Code
-      become: true
-      become_user: aur-builder
-      aur:
-        name: visual-studio-code-bin
-
-    - name: Install VS Code extensions
-      ansible.builtin.command: "code --install-extension {{ item }}"
-      loop: "{{ vscode__extensions }}"
+    - name: Setup the VSCode editor
+      ansible.builtin.import_role:
+        name: vscode
