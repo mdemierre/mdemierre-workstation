@@ -1,0 +1,13 @@
+- hosts: localhost
+  name: Configure Python dev environment
+  tasks:
+    - name: Install python development packages
+      become: true
+      community.general.pacman:
+        state: present
+        name:
+          - python
+          - pyenv
+          - python-poetry
+          - python-poetry-plugin-export
+          - python-poetry-plugin-up
