@@ -17,12 +17,13 @@
       ansible.builtin.user:
         name: aur-builder
         group: wheel
+        create_home: true
 
     - name: Add AUR builder user to sudoers for pacman
       become: true
       ansible.builtin.lineinfile:
-        path: /etc/sudoers.d/11-install-aur_builder
-        line: 'aur-builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+        path: /etc/sudoers.d/11-install-aur-builder
+        line: 'aur-builder ALL=(ALL) NOPASSWD: /usr/sbin/pacman'
         mode: 'u=rw,g=r'
         create: true
         validate: 'visudo -cf %s'
