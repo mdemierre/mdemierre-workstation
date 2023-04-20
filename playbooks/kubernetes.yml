@@ -20,7 +20,6 @@
         name: "{{ item }}"
       loop:
         - kind-bin
-        - lens-bin
 
     - name: Configure minikube
       ansible.builtin.command: "minikube config set {{ item.key }} {{ item.value }}"
