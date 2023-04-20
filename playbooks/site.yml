@@ -12,7 +12,7 @@
 # - import_playbook: js.yml
 - import_playbook: dbs.yml
 
-# Virtualization
+# Virtualization/containers
 - import_playbook: vms.yml
 - import_playbook: docker.yml
 - import_playbook: kubernetes.yml
